@@ -9,6 +9,7 @@ services:
     build: ./app
     volumes:
       - "./app/src:/app"
+      - xhprof:/tmp/xhprof/
 
   database:
     image: mysql:8
@@ -19,5 +20,13 @@ services:
     ports:
       - "${MYSQL_PORT}:3306"
 
+  xhprof:
+    build: ./xhprof/
+    volumes:
+      - xhprof:/tmp/xhprof/
+    ports:
+      - 8080:80
+
 volumes:
   mysql:
+  xhprof:

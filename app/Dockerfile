@@ -20,4 +20,7 @@ RUN wget https://github.com/tideways/php-xhprof-extension/archive/v$XHPROF_VERSI
     && rm -rf /tmp/php-xhprof-extension-$XHPROF_VERSION \
     && docker-php-ext-enable tideways_xhprof \
     && echo 'tideways.auto_prepend_library=0' >> ${PHP_INI_DIR}/conf.d/docker-php-ext-tideways.ini
-#    && echo 'extension=tideways_xhprof.so' > /usr/local/etc/php/conf.d/tideways.ini
+
+ENV XHPROF_PATH=/tmp/xhprof
+USER www-data
+RUN mkdir -p -m 755 $XHPROF_PATH
